@@ -18,7 +18,7 @@ WORKDIR /home/admin
 
 #install and enable SSH
 RUN apt-get update  \
-    && apt-get install openssh-server \
+    && apt-get install -y openssh-server \
     && service ssh start 
     
 #install docker
