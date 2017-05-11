@@ -1,7 +1,5 @@
 FROM ubuntu:14.04
 
-USER root
-
 #labeling
 LABEL maintainer="netiotedge@hilscher.com" \ 
       version="V1.0.0.0" \
@@ -10,33 +8,35 @@ LABEL maintainer="netiotedge@hilscher.com" \
 #version
 ENV HILSCHERNETIOTEDGE_DOCKER_DEV_VERSION 1.0.0.0
 
+#install under root
+USER root
+
 #create user "admin" with password "admin"
 RUN useradd --create-home --shell /bin/bash admin
 RUN echo 'admin:admin' | chpasswd
-USER admin
-WORKDIR /home/admin
 
 #install and enable SSH
 RUN apt-get update  \
     && apt-get install -y openssh-server \
-    && service ssh start 
+    && service ssh start
     
-#install docker
-RUN apt-get install \
+#install docker prerequisites
+RUN apt-get install -y \
     apt-transport-https \
     ca-certificates \
     curl \
-    software-properties-common \
-    && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - \\
+    software-properties-common
+    
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - \\
     && add-apt-repository \
        "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
        $(lsb_release -cs) \
        stable" \
     && apt-get update \
-    && apt-get install docker-ce
-
-#set the entrypoint
-ENTRYPOINT ["/bin/bash"]
+    && apt-get install -y docker-ce
 
 #SSH Port
 EXPOSE 22
+
+#set the entrypoint
+CMD ["/usr/sbin/sshd", "-D"]
