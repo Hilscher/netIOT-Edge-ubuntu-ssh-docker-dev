@@ -50,7 +50,7 @@ STEP 3. Enter the following parameters under **Containers > Add Container**
 
 * **Advanced container settings > Command > Console**: `Interactive && TTY`checked
 
-* **Advanced container settings > Volumes > map additional volume**: `Container: /var/run/docker.sock, bind -> Host: /var/run/docker.sock `
+* **Advanced container settings > Volumes > map additional volume**: `Container: /var/run/docker.sock, Bind -> Host: /var/run/docker.sock `
 
 STEP 4. Press the button **Actions > Start container**
 
