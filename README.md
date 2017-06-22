@@ -42,7 +42,7 @@ STEP 2. Click the Docker tile to open the [Portainer.io](http://portainer.io/) D
 
 STEP 3. Enter the following parameters under **Containers > Add Container**
 
-* **Image**: `hilscher/netiot-edge-ubuntu-ssh-docker-dev`
+* **Image**: `hilschernetiotedge/netiot-edge-ubuntu-ssh-docker-dev`
 
 * **Restart policy**: `always`
 
